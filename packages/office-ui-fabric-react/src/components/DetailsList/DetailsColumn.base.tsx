@@ -96,7 +96,7 @@ export class DetailsColumnBase extends BaseComponent<IDetailsColumnProps> {
                     !this.props.onRenderColumnHeaderTooltip && this._hasAccessibleLabel() ? `${parentId}-${column.key}-tooltip` : undefined
                   }
                   onContextMenu={this._onColumnContextMenu.bind(this, column)}
-                  onClick={this._onColumnClick.bind(this, column)}
+                  onClick={this._onColumnClick.bind(this, column, event)}
                   aria-haspopup={column.columnActionsMode === ColumnActionsMode.hasDropdown}
                   aria-expanded={
                     column.columnActionsMode === ColumnActionsMode.hasDropdown ? (column.isMenuOpen ? true : false) : undefined
@@ -199,12 +199,25 @@ export class DetailsColumnBase extends BaseComponent<IDetailsColumnProps> {
     return <span className={tooltipHostProps.hostClassName}>{tooltipHostProps.children}</span>;
   };
 
-  private _onColumnClick(column: IColumn, ev: React.MouseEvent<HTMLElement>): void {
+  private _onColumnClick(column: IColumn, ev: React.MouseEvent<HTMLElement>, event: any): void {
     if (column.columnActionsMode === ColumnActionsMode.disabled) {
       return;
     }
-
     const { onColumnClick } = this.props;
+    if (navigator.userAgent.indexOf('MSIE ') > -1 || navigator.userAgent.indexOf('Trident/') > -1) {
+      const hdr = event.target;
+      hdr.addEventListener('keydown', (events: any) => {
+        if (events.keyCode === 13) {
+          if (column.onColumnClick) {
+            column.onColumnClick(ev, column);
+          }
+
+          if (onColumnClick) {
+            onColumnClick(ev, column);
+          }
+        }
+      });
+    }
 
     if (column.onColumnClick) {
       column.onColumnClick(ev, column);
@@ -214,7 +227,6 @@ export class DetailsColumnBase extends BaseComponent<IDetailsColumnProps> {
       onColumnClick(ev, column);
     }
   }
-
   private _getColumnDragDropOptions(): IDragDropOptions {
     const { columnIndex } = this.props;
     const options = {
