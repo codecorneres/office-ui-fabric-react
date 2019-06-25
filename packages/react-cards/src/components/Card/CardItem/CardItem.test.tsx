@@ -3,16 +3,6 @@ import { mount } from 'enzyme';
 import { Card } from '../Card';
 import * as renderer from 'react-test-renderer';
 
-import { CardStyles } from '../Card.styles';
-import { ICardProps, ICardTokens, ICardStyles } from '../Card.types';
-import { CardItemStyles } from './CardItem.styles';
-import { ICardItemProps, ICardItemTokens, ICardItemStyles } from './CardItem.types';
-
-import { IStylesFunction } from '@uifabric/foundation';
-import { createTheme } from 'office-ui-fabric-react';
-
-const testTheme = createTheme({});
-
 describe('Card Item', () => {
   it('can handle not having a class', () => {
     const wrapper = mount(
@@ -40,11 +30,11 @@ describe('Card Item', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders correctly when having the disableChildPadding prop set to true', () => {
+  it('renders correctly when having tokens passed to it', () => {
     const tree = renderer
       .create(
-        <Card>
-          <Card.Item disableChildPadding>
+        <Card tokens={{ childrenMargin: 10 }}>
+          <Card.Item tokens={{ margin: '12px 8px' }}>
             <div />
           </Card.Item>
         </Card>
@@ -54,26 +44,139 @@ describe('Card Item', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('has the correct margin values when the disableChildPadding prop is set to true', () => {
-    const cardStylesFunc = CardStyles as IStylesFunction<ICardProps, ICardTokens, ICardStyles>;
-    const cardItemStylesFunc = CardItemStyles as IStylesFunction<ICardItemProps, ICardItemTokens, ICardItemStyles>;
+  it('renders correctly when filling up the margins while being the only item in a Vertical Card', () => {
+    const tree = renderer
+      .create(
+        <Card tokens={{ childrenMargin: 12 }}>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
 
-    const cardStyles = cardStylesFunc({}, testTheme, {}).root;
-    const cardItemStylesArray = cardItemStylesFunc({ disableChildPadding: true }, testTheme, {}).root;
+    expect(tree).toMatchSnapshot();
+  });
 
-    expect(cardStyles).not.toBeNull();
-    expect(cardItemStylesArray).not.toBeNull();
+  it('renders correctly when filling up the margins while being the first item in a Vertical Card', () => {
+    const tree = renderer
+      .create(
+        <Card tokens={{ childrenMargin: 12 }}>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+          <Card.Item>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
 
-    expect(cardStyles).toBeInstanceOf(Array);
-    expect(cardItemStylesArray).toBeInstanceOf(Array);
+    expect(tree).toMatchSnapshot();
+  });
 
-    const cardPadding = (cardStyles as Array<any>).find(style => style.padding).padding;
+  it('renders correctly when filling up the margins while being the middle item in a Vertical Card', () => {
+    const tree = renderer
+      .create(
+        <Card tokens={{ childrenMargin: 12 }}>
+          <Card.Item>
+            <div />
+          </Card.Item>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+          <Card.Item>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
 
-    const cardItemStyles = (cardItemStylesArray as Array<any>).find(style => style.marginLeft || style.marginRight);
-    const cardItemMarginLeft = cardItemStyles.marginLeft;
-    const cardItemMarginRight = cardItemStyles.marginRight;
+    expect(tree).toMatchSnapshot();
+  });
 
-    expect(cardItemMarginLeft).toBe(-cardPadding);
-    expect(cardItemMarginRight).toBe(-cardPadding - 1);
+  it('renders correctly when filling up the margins while being the last item in a Vertical Card', () => {
+    const tree = renderer
+      .create(
+        <Card tokens={{ childrenMargin: 12 }}>
+          <Card.Item>
+            <div />
+          </Card.Item>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correctly when filling up the margins while being the only item in a Compact Card', () => {
+    const tree = renderer
+      .create(
+        <Card compact tokens={{ childrenMargin: 12 }}>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correctly when filling up the margins while being the first item in a Compact Card', () => {
+    const tree = renderer
+      .create(
+        <Card compact tokens={{ childrenMargin: 12 }}>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+          <Card.Item>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correctly when filling up the margins while being the middle item in a Compact Card', () => {
+    const tree = renderer
+      .create(
+        <Card compact tokens={{ childrenMargin: 12 }}>
+          <Card.Item>
+            <div />
+          </Card.Item>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+          <Card.Item>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correctly when filling up the margins while being the last item in a Compact Card', () => {
+    const tree = renderer
+      .create(
+        <Card compact tokens={{ childrenMargin: 12 }}>
+          <Card.Item>
+            <div />
+          </Card.Item>
+          <Card.Item fill>
+            <div />
+          </Card.Item>
+        </Card>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 });

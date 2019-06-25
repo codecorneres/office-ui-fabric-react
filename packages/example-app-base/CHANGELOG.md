@@ -1,6 +1,264 @@
 # Change Log - @uifabric/example-app-base
 
-This log was last generated on Wed, 13 Mar 2019 00:42:29 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jun 2019 12:26:30 GMT and should not be manually modified.
+
+## 7.0.3
+Fri, 14 Jun 2019 12:26:30 GMT
+
+### Patches
+
+- Fix export to codepen in fabric 7
+- Fix missing assets in production build.
+
+## 7.0.2
+Thu, 13 Jun 2019 00:24:48 GMT
+
+### Patches
+
+- Initial release of Fabric 7
+
+## 7.0.0
+Wed, 12 Jun 2019 00:42:26 GMT
+
+### Breaking changes
+
+- Remove deprecated components; some styling fixes
+
+### Minor changes
+
+- Move Router to example-app-base
+
+### Patches
+
+- Revert example-app-base font changes
+- Update and dedupe React deps.
+- Remove use of deprecated @autobind decorator
+- Nav, Calendar, and DatePicker move into office-ui-fabric-react
+
+## 6.23.1
+Wed, 29 May 2019 12:21:24 GMT
+
+### Patches
+
+- Revert styled perf fixes temporarily.
+
+## 6.23.0
+Wed, 22 May 2019 12:21:34 GMT
+
+### Minor changes
+
+- Addressing a variety of problems related to style recalculations.
+
+### Patches
+
+- Use new fluent styles in ExampleCard; code highlighting cleanup; unused style cleanup
+- Update withPlatform return type
+
+## 6.22.0
+Tue, 21 May 2019 12:20:44 GMT
+
+### Minor changes
+
+- Add createDemoApp
+
+## 6.21.1
+Mon, 20 May 2019 12:22:33 GMT
+
+### Patches
+
+- ApiReferencesTable: use maps and combine if statements
+
+## 6.21.0
+Wed, 15 May 2019 12:31:44 GMT
+
+### Minor changes
+
+- Add randomEntry utility
+
+### Patches
+
+- PlatformContext: improve types, add displayName
+
+## 6.20.1
+Tue, 14 May 2019 07:50:30 GMT
+
+### Patches
+
+- getSiteArea now pulls name from page definition instead of URL
+- Update Fabric assets link
+
+## 6.20.0
+Tue, 14 May 2019 01:56:43 GMT
+
+### Minor changes
+
+- Add `themeSlots` api to ColorPalette.
+- ApiReferencesTable/ApiReferencesTableSet: handle type aliases.
+
+## 6.19.0
+Thu, 09 May 2019 12:35:50 GMT
+
+### Minor changes
+
+- Add SiteMessageBar component and renderSiteMessageBar api to ISiteDefinition
+
+## 6.18.0
+Tue, 07 May 2019 12:34:52 GMT
+
+### Minor changes
+
+- Use kebab case IDs and add more jump link options
+
+### Patches
+
+- Fix UHF header style bugs.
+- Allow regex redirects
+
+## 6.17.4
+Mon, 06 May 2019 19:32:45 GMT
+
+### Patches
+
+- Fix UHF styling conflicts
+
+## 6.17.3
+Mon, 06 May 2019 12:35:11 GMT
+
+### Patches
+
+- Added css reset directly to ul
+
+## 6.17.2
+Mon, 06 May 2019 00:28:08 GMT
+
+### Patches
+
+- Syntax highlighting optimizations
+
+## 6.17.1
+Sun, 05 May 2019 19:59:10 GMT
+
+### Patches
+
+- ApiReferencesTable: only render methods and members tables if not empty
+- Fix footer flashing, sticky nav, sticky side rail
+- Anchor link handling and other bug fixes
+- More EditSection tooltip fixes
+
+## 6.17.0
+Sat, 04 May 2019 00:01:53 GMT
+
+### Minor changes
+
+- Adds shell and bash language support
+- Bug fixes and styling updates for new website
+- Updates for new website
+- Break out of existing customizations when showing example card.
+
+### Patches
+
+- conditionally render Implementation jump link based on presence of jsonDocs
+
+## 6.16.1
+Thu, 02 May 2019 12:36:35 GMT
+
+### Patches
+
+- extractAnchorLink shouldn't return undefined
+
+## 6.16.0
+Wed, 01 May 2019 12:34:24 GMT
+
+### Minor changes
+
+- Start copying new components and deprecating old things
+
+## 6.15.0
+Tue, 30 Apr 2019 12:31:36 GMT
+
+### Minor changes
+
+- add ApiReferencesTable and ApiReferencesTableSet
+
+### Patches
+
+- fix links for fabric demo/pr deploy site
+-  Use new getFocusStyle signature
+
+## 6.14.4
+Fri, 26 Apr 2019 12:35:24 GMT
+
+### Patches
+
+- Deprecate implementation examples
+
+## 6.14.3
+Wed, 24 Apr 2019 12:35:54 GMT
+
+### Patches
+
+- Deprecate component status
+
+## 6.14.2
+Thu, 18 Apr 2019 12:31:50 GMT
+
+### Patches
+
+- reduce the re-export wild card to fix website
+
+## 6.14.1
+Wed, 17 Apr 2019 12:33:35 GMT
+
+### Patches
+
+- Run prettier on all files
+
+## 6.14.0
+Tue, 16 Apr 2019 12:32:59 GMT
+
+### Minor changes
+
+- Convert components to css-in-js
+
+## 6.13.2
+Tue, 02 Apr 2019 12:36:20 GMT
+
+### Patches
+
+- handle TSDoc default value tag
+
+## 6.13.1
+Tue, 02 Apr 2019 00:38:14 GMT
+
+### Patches
+
+- Use ^ ranges instead of >=
+
+## 6.13.0
+Fri, 29 Mar 2019 12:36:45 GMT
+
+### Minor changes
+
+- Code and documentation cleanup
+
+### Patches
+
+- Make CodepenComponent specify SCSS preprocessor
+
+## 6.12.4
+Wed, 27 Mar 2019 12:34:02 GMT
+
+### Patches
+
+- Enable stricter lint and compiler options
+- ExampleCard: Remove dependency on styles from random example, and remove utility CSS classes
+
+## 6.12.3
+Fri, 22 Mar 2019 12:34:41 GMT
+
+### Patches
+
+- Remove ExampleCardComponent now that Stack has been promoted.
 
 ## 6.12.2
 Wed, 13 Mar 2019 00:42:29 GMT

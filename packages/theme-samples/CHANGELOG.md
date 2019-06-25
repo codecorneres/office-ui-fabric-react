@@ -1,6 +1,39 @@
 # Change Log - @uifabric/theme-samples
 
-This log was last generated on Tue, 15 Jan 2019 13:36:45 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jun 2019 12:26:30 GMT and should not be manually modified.
+
+## 7.0.2
+Fri, 14 Jun 2019 12:26:30 GMT
+
+### Patches
+
+- Fix missing assets in production build.
+
+## 7.0.1
+Thu, 13 Jun 2019 00:24:48 GMT
+
+### Patches
+
+- Initial release of Fabric 7
+
+## 0.1.7
+Wed, 12 Jun 2019 00:42:26 GMT
+
+*Version update only*
+
+## 0.1.6
+Tue, 14 May 2019 07:50:30 GMT
+
+### Patches
+
+- Update Fabric assets link
+
+## 0.1.5
+Tue, 02 Apr 2019 00:38:15 GMT
+
+### Patches
+
+- Use ^ ranges instead of >=
 
 ## 0.1.4
 Tue, 15 Jan 2019 13:36:45 GMT

@@ -60,6 +60,7 @@ const steps = [
   { template: 'Readme', output: 'README.md' },
   { template: 'IndexHtml', output: 'index.html' },
   { template: 'JestConfig', output: 'jest.config.js' },
+  { template: 'JestDomConfig', output: 'jest.dom.config.js' },
   { template: 'JsConfig', output: 'jsconfig.json' },
   { template: 'PackageJson', output: 'package.json' },
   { template: 'PrettierConfig', output: 'prettier.config.js' },
@@ -73,10 +74,7 @@ const steps = [
   { template: 'IndexTs', output: path.join('src', 'index.ts') },
   { template: 'Version', output: path.join('src', 'version.ts') },
   { template: 'AppDefinition', output: path.join('src', 'demo', 'AppDefinition.tsx') },
-  { template: 'ColorStyles', output: path.join('src', 'demo', 'ColorStyles.scss') },
-  { template: 'GettingStartedPageStyles', output: path.join('src', 'demo', 'GettingStartedPage.scss') },
   { template: 'GettingStartedPage', output: path.join('src', 'demo', 'GettingStartedPage.tsx') },
-  { template: 'DemoStyles', output: path.join('src', 'demo', 'index.scss') },
   { template: 'Demo', output: path.join('src', 'demo', 'index.tsx') }
 ];
 

@@ -1,4 +1,6 @@
-# [@uifabric/react-cards](http://dev.microsoft.com/fabric)
+# @uifabric/react-cards
+
+**Card components for [Office UI Fabric React](http://dev.microsoft.com/fabric)**
 
 ##### What are Card components?
 
@@ -13,11 +15,9 @@ A `Card` is a surface to display content and actions about a single topic. It ac
 - Borders
 - Colors
 
-##### Card components for Office UI Fabric React
-
 This package is intended to contain different variants of `Card` components to be leveraged when building applications using UI Fabric.
 
-Please take note that, at the moment, these are not production ready components and **should never be used in product**. This ReactCards space is useful for testing new components whose APIs might change before final release.
+Please take note that, at the moment, these are not production-ready components and **should never be used in product**. This space is useful for testing new components whose APIs might change before final release.
 
 To import ReactCards components:
 

@@ -1,26 +1,33 @@
 import { getGlobalClassNames } from '@uifabric/styling';
-import { ICardItemComponent, ICardItemStylesReturnType } from './CardItem.types';
+import { ICardItemComponent, ICardItemStylesReturnType, ICardItemTokenReturnType } from './CardItem.types';
 
 const GlobalClassNames = {
   root: 'ms-CardItem'
 };
 
-export const CardItemStyles: ICardItemComponent['styles'] = (props, theme): ICardItemStylesReturnType => {
-  const { disableChildPadding } = props;
+const baseTokens: ICardItemComponent['tokens'] = {
+  padding: 0
+};
 
+const filledTokens: ICardItemComponent['tokens'] = {
+  margin: 0
+};
+
+export const CardItemTokens: ICardItemComponent['tokens'] = (props, theme): ICardItemTokenReturnType => [
+  baseTokens,
+  props.fill && filledTokens
+];
+
+export const CardItemStyles: ICardItemComponent['styles'] = (props, theme, tokens): ICardItemStylesReturnType => {
   const classNames = getGlobalClassNames(GlobalClassNames, theme);
 
   return {
     root: [
-      theme.fonts.medium,
+      theme.fonts.large,
       classNames.root,
       {
-        width: 'auto',
-        height: 'auto'
-      },
-      disableChildPadding && {
-        marginLeft: -12,
-        marginRight: -13
+        margin: tokens.margin,
+        padding: tokens.padding
       }
     ]
   };

@@ -1,6 +1,114 @@
 # Change Log - @uifabric/charting
 
-This log was last generated on Tue, 05 Mar 2019 17:33:41 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jun 2019 12:26:30 GMT and should not be manually modified.
+
+## 0.131.2
+Fri, 14 Jun 2019 12:26:30 GMT
+
+### Patches
+
+- Resolved the issue of the legends repeating even with same color and legend
+- Fix missing assets in production build.
+
+## 0.131.1
+Thu, 13 Jun 2019 00:24:48 GMT
+
+### Patches
+
+- Initial release of Fabric 7
+- Fix verticalBarChart x-axis description cut off issue
+
+## 0.30.3
+Wed, 12 Jun 2019 00:42:26 GMT
+
+### Patches
+
+- Render demo app with Markdown instead of PageMarkdown
+- Update and dedupe React deps.
+
+## 0.30.2
+Tue, 11 Jun 2019 12:21:35 GMT
+
+### Patches
+
+- Fix LineChart does not display properly in FireFox browser
+
+## 0.30.1
+Fri, 07 Jun 2019 12:21:48 GMT
+
+### Patches
+
+- Data Viz 'Legends' is not accessible using keyboard tab navigation 
+
+## 0.30.0
+Mon, 03 Jun 2019 23:04:02 GMT
+
+### Minor changes
+
+- Add benchmark triangle for HorizontalBarChart
+
+## 0.29.2
+Thu, 30 May 2019 12:22:06 GMT
+
+### Patches
+
+- Fix charting build
+
+## 0.29.1
+Tue, 21 May 2019 12:20:44 GMT
+
+### Patches
+
+- Use shared demo app bootstrapping code
+
+## 0.29.0
+Thu, 16 May 2019 17:34:08 GMT
+
+### Minor changes
+
+- Rotated the x-axis text for date values
+
+## 0.28.14
+Tue, 14 May 2019 07:50:30 GMT
+
+### Patches
+
+- Update Fabric assets link
+
+## 0.28.13
+Tue, 16 Apr 2019 12:32:59 GMT
+
+### Patches
+
+- Remove nonexistent related links from docs
+
+## 0.28.12
+Tue, 02 Apr 2019 00:38:14 GMT
+
+### Patches
+
+- Use ^ ranges instead of >=
+
+## 0.28.11
+Wed, 27 Mar 2019 12:34:02 GMT
+
+### Patches
+
+- Replace custom high contrast selector with constant
+
+## 0.28.10
+Tue, 26 Mar 2019 12:32:51 GMT
+
+### Patches
+
+- Remove IE 11-incompatible constructs
+
+## 0.28.9
+Thu, 21 Mar 2019 12:36:29 GMT
+
+### Patches
+
+- "added the background color and opacity for legends in the high contrast mode "
 
 ## 0.28.8
 Tue, 05 Mar 2019 17:33:41 GMT

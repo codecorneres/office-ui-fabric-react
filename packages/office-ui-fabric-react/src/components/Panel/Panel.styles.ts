@@ -4,6 +4,7 @@ import {
   AnimationVariables,
   DefaultFontStyles,
   getGlobalClassNames,
+  HighContrastSelector,
   ScreenWidthMinMedium,
   ScreenWidthMinLarge,
   ScreenWidthMinXLarge,
@@ -11,6 +12,9 @@ import {
   ScreenWidthMinUhfMobile,
   IStyle
 } from '../../Styling';
+import { FontWeights } from '../../Styling';
+import { getWindow } from '../../Utilities';
+
 // TODO -Issue #5689: Comment in once Button is converted to mergeStyles
 // import { IStyleFunctionOrObject } from '../../Utilities';
 // import { IButtonStyles, IButtonStyleProps } from '../../Button';
@@ -197,10 +201,11 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
     theme,
     type = PanelType.smallFixedFar
   } = props;
-  const { palette } = theme;
+  const { palette, effects } = theme;
   const classNames = getGlobalClassNames(GlobalClassNames, theme);
   const isCustomPanel = type === PanelType.custom || type === PanelType.customNear;
-  const windowHeight = typeof window !== 'undefined' ? window.innerHeight : '100%';
+  const win = getWindow();
+  const windowHeight = typeof win !== 'undefined' ? win.innerHeight : '100%';
 
   return {
     root: [
@@ -239,7 +244,7 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
       classNames.main,
       {
         backgroundColor: palette.white,
-        boxShadow: '0px 0px 30px 0px rgba(0,0,0,0.2)',
+        boxShadow: effects.elevation64,
         pointerEvents: 'auto',
         position: 'absolute',
         display: 'flex',
@@ -247,7 +252,7 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
         overflowX: 'hidden',
         overflowY: 'auto',
         WebkitOverflowScrolling: 'touch',
-        maxHeight: '100%',
+        maxHeight: windowHeight,
         bottom: 0,
         top: 0,
         // (left, right, width) - Properties to be overridden depending on the type of the Panel and the screen breakpoint.
@@ -255,8 +260,9 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
         right: panelMargin.none,
         width: panelWidth.full,
         selectors: {
-          ['@supports (-webkit-overflow-scrolling: touch)']: {
-            maxHeight: windowHeight
+          [HighContrastSelector]: {
+            borderLeft: `3px solid ${palette.neutralLight}`,
+            borderRight: `3px solid ${palette.neutralLight}`
           },
           ...getPanelBreakpoints(type)
         }
@@ -277,12 +283,7 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
         maxWidth: '100vw'
       },
       isFooterAtBottom && {
-        height: '100%',
-        selectors: {
-          ['@supports (-webkit-overflow-scrolling: touch)']: {
-            height: windowHeight
-          }
-        }
+        height: windowHeight
       },
       isOpen && isAnimating && !isOnRightSide && AnimationClassNames.slideRightIn40,
       isOpen && isAnimating && isOnRightSide && AnimationClassNames.slideLeftIn40,
@@ -307,21 +308,11 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
-        maxHeight: '100%',
-        overflowY: 'hidden',
-        selectors: {
-          ['@supports (-webkit-overflow-scrolling: touch)']: {
-            maxHeight: windowHeight
-          }
-        }
+        maxHeight: windowHeight,
+        overflowY: 'hidden'
       },
       isFooterAtBottom && {
-        height: '100%',
-        selectors: {
-          ['@supports (-webkit-overflow-scrolling: touch)']: {
-            height: windowHeight
-          }
-        }
+        height: windowHeight
       }
     ],
     header: [
@@ -343,7 +334,9 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
       DefaultFontStyles.xLarge,
       {
         color: palette.neutralPrimary,
-        lineHeight: '32px',
+        fontSize: 20, // TODO: after the type ramp gets reevaluated this needs to be changed
+        fontWeight: FontWeights.semibold,
+        lineHeight: '27px',
         margin: 0
       },
       headerClassName
@@ -352,12 +345,7 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
       classNames.scrollableContent,
       {
         overflowY: 'auto',
-        height: '100%',
-        selectors: {
-          ['@supports (-webkit-overflow-scrolling: touch)']: {
-            height: windowHeight
-          }
-        }
+        height: windowHeight
       }
     ],
     content: [
@@ -385,8 +373,8 @@ export const getStyles = (props: IPanelStyleProps): IPanelStyles => {
       classNames.footerInner,
       sharedPaddingStyles,
       {
-        paddingBottom: '20px',
-        paddingTop: '20px'
+        paddingBottom: 16,
+        paddingTop: 16
       }
     ]
     // subComponentStyles: {

@@ -1,27 +1,47 @@
-import { IComponent, IComponentStyles, IHTMLSlot, IHTMLElementSlot, ISlotProp, IStyleableComponentProps } from '../../Foundation';
-import { IFontWeight, IStackSlot, ITextSlot } from 'office-ui-fabric-react';
-import { IContextualMenuSlot, IIconSlot } from '../../utilities/factoryComponents.types';
-import { IBaseProps } from '../../Utilities';
+import { IComponent, IComponentStyles, IHTMLElementSlot, ISlotProp, ISlottableProps, IStyleableComponentProps } from '../../Foundation';
+import { IFontWeight, IKeytipProps, IStackSlot, ITextSlot } from 'office-ui-fabric-react';
+import { IIconSlot } from '../../utilities/factoryComponents.types';
+import { IBaseProps, Omit } from '../../Utilities';
 import { IRawStyleBase } from '@uifabric/merge-styles/lib/IRawStyleBase';
 
+/**
+ * {@docCategory Button}
+ */
 export type IButtonComponent = IComponent<IButtonProps, IButtonTokens, IButtonStyles, IButtonViewProps>;
 
 // These types are redundant with IButtonComponent but are needed until TS function return widening issue is resolved:
 // https://github.com/Microsoft/TypeScript/issues/241
 // For now, these helper types can be used to provide return type safety when specifying tokens and styles functions.
+/**
+ * {@docCategory Button}
+ */
 export type IButtonTokenReturnType = ReturnType<Extract<IButtonComponent['tokens'], Function>>;
+/**
+ * {@docCategory Button}
+ */
 export type IButtonStylesReturnType = ReturnType<Extract<IButtonComponent['styles'], Function>>;
 
+/**
+ * {@docCategory Button}
+ */
 export type IButtonSlot = ISlotProp<IButtonProps>;
 
+/**
+ * {@docCategory Button}
+ */
+export type IButtonRootElements = 'a' | 'button' | 'div';
+
+/**
+ * {@docCategory Button}
+ */
 export interface IButtonSlots {
   /**
    * Defines the root slot of the component.
    */
-  root?: IHTMLElementSlot<'button'>;
+  root?: IHTMLElementSlot<IButtonRootElements>;
 
   /**
-   * Defines the horizontal stack used for specifying inner layout of Button.
+   * Defines the horizontal stack used for specifying the inner layout of the Button.
    */
   stack?: IStackSlot;
 
@@ -34,40 +54,28 @@ export interface IButtonSlots {
    * Defines the icon that is displayed next to the text inside the Button.
    */
   icon?: IIconSlot;
-
-  /**
-   * Defines the contextual menu that appears when you click on the Button.
-   */
-  menu?: IContextualMenuSlot;
-
-  /**
-   * Defines the menu chevron icon that is displayed insisde the Button.
-   */
-  menuIcon?: IIconSlot;
-
-  // The following slots are specific to Split Button and aren't used if the split property is not present.
-  /**
-   * Defines the stack container for the primary action of the Split Button.
-   */
-  primaryActionContainer?: IStackSlot;
-
-  /**
-   * Defines the span container for the secondary action of the Split Button.
-   */
-  secondaryActionContainer?: IHTMLSlot;
-
-  /**
-   * Defines the divider that separates the left and right parts of a Split Button.
-   */
-  splitDivider?: IHTMLSlot;
 }
 
-export interface IButton {}
+/**
+ * {@docCategory Button}
+ */
+export interface IButton {
+  /**
+   * Sets focus to the Button.
+   */
+  focus: () => void;
+}
 
+export type INativeButtonProps = Omit<React.AllHTMLAttributes<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement>, 'content'>;
+
+/**
+ * {@docCategory Button}
+ */
 export interface IButtonProps
-  extends IButtonSlots,
+  extends ISlottableProps<IButtonSlots>,
     IStyleableComponentProps<IButtonProps, IButtonTokens, IButtonStyles>,
-    IBaseProps<IButton> {
+    IBaseProps<IButton>,
+    INativeButtonProps {
   /**
    * Defines an href reference that, if provided, will make this component render as an anchor.
    */
@@ -93,101 +101,278 @@ export interface IButtonProps
   disabled?: boolean;
 
   /**
-   * Defines the inital expanded state of the Button. If you want the Button to maintain its own state, use this.
-   * Otherwise refer to `expanded`.
+   * Defines whether the Button is in a checked state (for toggle buttons).
    */
-  defaultExpanded?: boolean;
+  checked?: boolean;
 
   /**
-   * Defines whether the Button is in an expanded state.
-   * @defaultvalue defaultExpanded
-   */
-  expanded?: boolean;
-
-  /**
-   * Defines whether the button is rendered as a Split Button.
+   * Defines whether disabled buttons should be tabbable via keyboard navigation or not.
    * @defaultvalue false
    */
-  split?: boolean;
+  allowDisabledFocus?: boolean;
 
   /**
-   * Split Buttons only - Defines whether the first action of the Split Button is disabled.
-   * @defaultvalue false
+   * Defines the aria label that the screen readers use when focus goes on the Button.
    */
-  primaryActionDisabled?: boolean;
+  ariaLabel?: string;
 
   /**
-   * Defines an event callback that is triggered when the Button is clicked.
+   * Defines optional keytips for this button.
    */
-  onClick?: (ev: React.MouseEvent<HTMLElement>) => void;
+  keytipProps?: IKeytipProps;
 
   /**
-   * Defines an event callback that is triggered when a keypress is made with the focus on a Button.
+   * Defines an unique id to identify the item. Typically a duplicate of key value.
    */
-  onKeyDown?: (ev: React.KeyboardEvent<HTMLElement>) => void;
+  uniqueId?: string | number;
 }
 
+/**
+ * {@docCategory Button}
+ */
 export interface IButtonViewProps extends IButtonProps {
   /**
-   * Defines a callback that runs after the Button's contextual menu has been closed (removed from the DOM).
+   * Defines a reference to the inner Button.
    */
-  onMenuDismiss: () => void;
-
-  /**
-   * Defines the target that the contextual menu uses to position itself.
-   */
-  menuTarget: HTMLElement | undefined;
-
-  /**
-   * Defines an event callback that is triggered when the secondary action of a Split Button is clicked.
-   */
-  onSecondaryActionClick?: (ev: React.MouseEvent<HTMLElement>) => void;
+  buttonRef?: React.RefObject<HTMLButtonElement>;
 }
 
+/**
+ * {@docCategory Button}
+ */
 export interface IButtonTokens {
-  backgroundColor?: string;
-  backgroundColorHovered?: string;
-  backgroundColorPressed?: string;
-  color?: string;
-  colorHovered?: string;
-  colorPressed?: string;
-  borderColor?: string;
-  borderColorFocused?: string;
-  borderColorHovered?: string;
-  borderColorPressed?: string;
-  iconColor?: string;
-  iconColorHovered?: string;
-  iconColorPressed?: string;
-  outlineColor?: string;
-  borderRadius?: number | string;
-  borderWidth?: number | string;
-  contentPadding?: number | string;
-  contentPaddingFocused?: number | string;
-  textFamily?: string;
-  textSize?: number | string;
-  textWeight?: IFontWeight;
-  width?: number | string;
-  height?: number | string;
-  iconSize?: number | string;
-  iconWeight?: number;
-  lineHeight?: number | string;
-  minWidth?: number | string;
-  minHeight?: number | string;
+  /**
+   * Defines how far should the background extend within the Button.
+   */
   backgroundClip?: IRawStyleBase['backgroundClip'];
 
-  // The following tokens are specific to Split Button and aren't used if the split property is not present.
-  primaryActionBackgroundColor?: string;
-  primaryActionBackgroundColorHovered?: string;
-  primaryActionBackgroundColorPressed?: string;
-  secondaryActionBackgroundColor?: string;
-  secondaryActionBackgroundColorHovered?: string;
-  secondaryActionBackgroundColorPressed?: string;
-  primaryActionColor?: string;
-  primaryActionColorHovered?: string;
-  primaryActionColorPressed?: string;
-  secondaryActionColor?: string;
-  secondaryActionColorHovered?: string;
-  secondaryActionColorPressed?: string;
+  /**
+   * Defines the background color of the Button.
+   */
+  backgroundColor?: string;
+
+  /**
+   * Defines the background color of the Button when it is in a hovered state.
+   */
+  backgroundColorHovered?: string;
+
+  /**
+   * Defines the background color of the Button when it is in an active state.
+   */
+  backgroundColorPressed?: string;
+
+  /**
+   * Defines the border color of the Button.
+   */
+  borderColor?: string;
+
+  /**
+   * Defines the border color of the Button when the focus is on it.
+   */
+  borderColorFocused?: string;
+
+  /**
+   * Defines the border color of the Button when it is in a hovered state.
+   */
+  borderColorHovered?: string;
+
+  /**
+   * Defines the border color of the Button when it is in an active state.
+   */
+  borderColorPressed?: string;
+
+  /**
+   * Defines the border radius of the Button.
+   */
+  borderRadius?: number | string;
+
+  /**
+   * Defines the border style of the Button.
+   */
+  borderStyle?: string;
+
+  /**
+   * Defines the border style of the Button when the focus is on it.
+   */
+  borderStyleFocused?: string;
+
+  /**
+   * Defines the border width of the Button.
+   */
+  borderWidth?: number | string;
+
+  /**
+   * Defines the border width of the Button when the focus is on it.
+   */
+  borderWidthFocused?: number | string;
+
+  /**
+   * Defines the text color of elements inside the Button.
+   */
+  color?: string;
+
+  /**
+   * Defines the text color of elements inside the Button when it is in a hovered state.
+   */
+  colorHovered?: string;
+
+  /**
+   * Defines the text color of elements inside the Button when it is in an active state.
+   */
+  colorPressed?: string;
+
+  /**
+   * Defines the padding of the Button, between the Button border and the Button contents.
+   */
+  contentPadding?: number | string;
+
+  /**
+   * Defines the padding of the Button, between the Button border and the Button contents, when the focus is on the Button.
+   */
+  contentPaddingFocused?: number | string;
+
+  /**
+   * Defines the mouse cursor to be displayed when pointing over the Button.
+   */
+  cursor?: string;
+
+  /**
+   * Defines a fixed height for the Button.
+   */
+  height?: number | string;
+
+  /**
+   * Defines the background color of the Button when in high contrast mode.
+   */
+  highContrastBackgroundColor?: string;
+
+  /**
+   * Defines the background color of the Button when it is in a hovered state and in high contrast mode.
+   */
+  highContrastBackgroundColorHovered?: string;
+
+  /**
+   * Defines the background color of the Button when it is in an active state and in high contrast mode.
+   */
+  highContrastBackgroundColorPressed?: string;
+
+  /**
+   * Defines the border color of the Button when in high contrast mode.
+   */
+  highContrastBorderColor?: string;
+
+  /**
+   * Defines the border color of the Button when it is in a hovered state and in high contrast mode.
+   */
+  highContrastBorderColorHovered?: string;
+
+  /**
+   * Defines the border color of the Button when it is in an active state and in high contrast mode.
+   */
+  highContrastBorderColorPressed?: string;
+
+  /**
+   * Defines the text color of elements inside the Button when in high contrast mode.
+   */
+  highContrastColor?: string;
+
+  /**
+   * Defines the text color of elements inside the Button when it is in a hovered state and in high contrast mode.
+   */
+  highContrastColorHovered?: string;
+
+  /**
+   * Defines the text color of elements inside the Button when it is in an active state and in high contrast mode.
+   */
+  highContrastColorPressed?: string;
+
+  /**
+   * Defines the icon color of the Button when in high contrast mode.
+   */
+  highContrastIconColor?: string;
+
+  /**
+   * Defines the icon color of the Button when it is in a hovered state and in high contrast mode.
+   */
+  highContrastIconColorHovered?: string;
+
+  /**
+   * Defines the icon color of the Button when it is in an active state and in high contrast mode.
+   */
+  highContrastIconColorPressed?: string;
+
+  /**
+   * Defines the icon color of the Button.
+   */
+  iconColor?: string;
+
+  /**
+   * Defines the icon color of the Button when it is in a hovered state.
+   */
+  iconColorHovered?: string;
+
+  /**
+   * Defines the icon color of the Button when it is in an active state.
+   */
+  iconColorPressed?: string;
+
+  /**
+   * Defines the size of the icon inside the Button.
+   */
+  iconSize?: number | string;
+
+  /**
+   * Defines the font weight of the icon inside the Button.
+   */
+  iconWeight?: number;
+
+  /**
+   * Defines the line height of elements inside the Button.
+   */
+  lineHeight?: number | string;
+
+  /**
+   * Defines a minimum height for the Button.
+   */
+  minHeight?: number | string;
+
+  /**
+   * Defines a minimum width for the Button.
+   */
+  minWidth?: number | string;
+
+  /**
+   * Defines whether or not to override any styling properties that would have been set in high contrast mode.
+   */
+  msHighContrastAdjust?: string;
+
+  /**
+   * Defines the outline color of the Button.
+   */
+  outlineColor?: string;
+
+  /**
+   * Defines the font to be used for the text inside the Button.
+   */
+  textFamily?: string;
+
+  /**
+   * Defines the size of the text inside the Button.
+   */
+  textSize?: number | string;
+
+  /**
+   * Defines the font weight of the text inside the Button.
+   */
+  textWeight?: IFontWeight;
+
+  /**
+   * Defines a fixed width for the Button.
+   */
+  width?: number | string;
 }
 
+/**
+ * {@docCategory Button}
+ */
 export type IButtonStyles = IComponentStyles<IButtonSlots>;

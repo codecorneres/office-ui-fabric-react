@@ -1,8 +1,8 @@
-import { ITooltipStyleProps, ITooltipStyles, TooltipDelay } from './Tooltip.types';
+import { ITooltipStyleProps, ITooltipStyles } from './Tooltip.types';
 import { AnimationClassNames } from '../../Styling';
 
 export const getStyles = (props: ITooltipStyleProps): ITooltipStyles => {
-  const { className, delay, maxWidth, theme } = props;
+  const { className, maxWidth, theme } = props;
   const { palette, fonts } = theme;
 
   return {
@@ -13,22 +13,15 @@ export const getStyles = (props: ITooltipStyleProps): ITooltipStyles => {
       {
         background: palette.white,
         padding: '8px',
-        animationDelay: '300ms',
         maxWidth: maxWidth
-      },
-      delay === TooltipDelay.zero && {
-        animationDelay: '0s'
-      },
-      delay === TooltipDelay.long && {
-        animationDelay: '500ms'
       },
       className
     ],
     content: [
       'ms-Tooltip-content',
       fonts.small,
-      palette.neutralPrimary,
       {
+        color: palette.neutralPrimary,
         wordWrap: 'break-word',
         overflowWrap: 'break-word',
         overflow: 'hidden'
@@ -37,6 +30,10 @@ export const getStyles = (props: ITooltipStyleProps): ITooltipStyles => {
     subText: [
       'ms-Tooltip-subtext',
       {
+        // Using inherit here to avoid unintentional global overrides of the <p> tag.
+        fontSize: 'inherit',
+        fontWeight: 'inherit',
+        color: 'inherit',
         margin: 0
       }
     ]
